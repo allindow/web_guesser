@@ -8,7 +8,7 @@ attr_reader   :card,
   end
 
   def correct?
-    if response == card.answer
+    response == card.answer
       true
     else
       false
