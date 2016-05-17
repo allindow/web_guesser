@@ -9,19 +9,4 @@ card_2 = Card.new("Approximately how many miles are in one astronomical unit?", 
 deck = Deck.new([card_1, card_2])
 round = Round.new(deck)
 
-
-card_number = 1
-
-def start
-  puts "Welcome! You're playing with #{deck.count} cards."
-  puts "-----------------------------------------"
-
-  until card_number > deck.count do
-    puts "This is card number #{card_number} out of #{deck.count}"
-    puts "Question: #{round.current_card.question}"
-    response = gets.chomp
-    guess = round.record_guess(response)
-    puts guess.feedback
-    card_number += 1
-  end
-end
+round.start
