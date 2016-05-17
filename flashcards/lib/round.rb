@@ -4,8 +4,10 @@ class Round
 
   def initialize(deck)
     @deck = deck
-    @guesses = guesses.to_a
+    @guesses = []
     @current_card = 0
+    @correct_count = 0
+
   end
 
   def current_card
@@ -13,17 +15,21 @@ class Round
   end
 
   def record_guess(response)
-    @guesses << response
+      @guesses << Guess.new(response, current_card)
+      guess = @guesses.last# @guesses << guess
+        if guess.correct?
+          @correct_count += 1
+        end
+      @current_card += 1
+      guess
   end
 
-  def feedback
-    if round.guesses.first == round.current_card.answer
-      "Correct!"
-    end
+  def number_correct
+    @correct_count
   end
+
+  def percent_correct
+    (@correct_count.to_f / @guesses.count.to_f) * 100
+  end
+
 end
-#
-#
-# #round.record_guess("Juneau")
-# => #<Guess:0x007ffdf19c8a00 @card=#<Card:0x007ffdf1820a90 @answer="Juneau", @question="What is the capital of Alaska?">, @response="Juneau">
-# round.guesses.count
