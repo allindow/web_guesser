@@ -9,18 +9,10 @@ attr_reader   :card,
 
   def correct?
     response == card.answer
-      true
-    else
-      false
-    end
   end
 
   def feedback
-    if correct?
-      "Correct!"
-    else
-      "Incorrect."
-    end
+    correct? ? "Correct!" : "Incorrect."
   end
 
 end
