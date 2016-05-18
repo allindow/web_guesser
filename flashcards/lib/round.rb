@@ -45,7 +45,7 @@ class Round
     until card_number > deck.count do
       puts "This is card number #{card_number} out of #{deck.count}"
       puts "Question: #{current_card.question}"
-      response = gets.chomp
+      response = STDIN.gets.chomp()
       guess = record_guess(response)
       puts guess.feedback
       card_number += 1

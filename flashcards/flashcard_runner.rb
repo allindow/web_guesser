@@ -3,12 +3,20 @@ require './lib/guess'
 require './lib/deck'
 require './lib/round'
 require './lib/card_generator'
+require './lib/userfile'
 
-cards = CardGenerator.new("cards.txt").cards
-# card_1 = Card.new("What is the capital of Alaska?", "juneau")
-# card_2 = Card.new("Approximately how many miles are in one astronomical unit?", "93,000,000")
-# card_3 = Card.new("What is the youngest Hanson brothers name?", "Zac")
-# card_4 = Card.new("In roller derby, which skater has the star on her helmet?", "Jammer")
+# cards = CardGenerator.new(filename).cards
+# deck = Deck.new(cards)
+# round = Round.new(deck)
+if ARGV[0].nil?
+  puts "What is your file name?"
+  filename = gets.chomp
+else
+  filename = ARGV[0]
+  # require "pry"; binding.pry
+end
+
+cards = CardGenerator.new(filename).cards
 deck = Deck.new(cards)
 round = Round.new(deck)
 
