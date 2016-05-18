@@ -1,7 +1,6 @@
 class Card
 
 attr_reader     :question,
-                :answer
 
 
   def initialize(question, answer)
@@ -9,5 +8,8 @@ attr_reader     :question,
     @answer = answer
   end
 
+  def answer
+    @answer
+  end
 
 end
