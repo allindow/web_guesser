@@ -7,7 +7,10 @@ class Round
     @guesses = []
     @current_card = 0
     @correct_count = 0
+  end
 
+  def pause
+    sleep 1
   end
 
   def current_card
@@ -32,25 +35,28 @@ class Round
     ((@correct_count.to_f / @guesses.count.to_f) * 100).to_i
   end
 
-  def end_round
+  def end_it
     puts "****** Game over! ******"
-    puts "You had #{number_correct} correct guesses out of #{deck.count} for a score of #{percent_correct}%."
+    puts "You had #{number_correct} correct guesses out of #{deck.count} for a score of #{percent_correct}%.\n\n"
   end
 
   def start
+    puts "\n\n"
     card_number = 1
     puts "Welcome! You're playing with #{deck.count} cards."
-    puts "-----------------------------------------"
-
+    puts "-----------------------------------------\n\n"
+    pause
     until card_number > deck.count do
       puts "This is card number #{card_number} out of #{deck.count}"
-      puts "Question: #{current_card.question}"
+      puts "Question: #{current_card.question}\n\n"
       response = STDIN.gets.chomp()
       guess = record_guess(response)
       puts guess.feedback
       card_number += 1
+      pause
+      puts "\n\n"
     end
-    end_round
+    # end_round
   end
 
 end
