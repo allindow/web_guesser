@@ -15,13 +15,13 @@ class Round
   end
 
   def record_guess(response)
-      @guesses << Guess.new(response, current_card)
-      guess = @guesses.last
-        if guess.correct?
-          @correct_count += 1
-        end
-      @current_card += 1
-      guess
+    @guesses << Guess.new(response, current_card)
+    guess = @guesses.last
+    if guess.correct?
+      @correct_count += 1
+    end
+    @current_card += 1
+    guess
   end
 
   def number_correct
@@ -46,6 +46,10 @@ class Round
       card_number += 1
     end
 
+    end_game
+  end
+
+  def end_game
     puts "****** Game over! ******"
     puts "You had #{number_correct} correct guesses out of #{deck.count} for a score of #{percent_correct}%."
   end

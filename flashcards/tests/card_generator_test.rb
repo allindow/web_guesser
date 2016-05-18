@@ -12,15 +12,15 @@ class CardGeneratorTest < Minitest::Test
   assert CardGenerator.new(nil)
 end
 
-def test_card_generator_loads_cards
-  file = CardGenerator.new("cards.txt")
-  cards = file.cards
-  assert_equal Array, cards.class
-  assert_equal Card, cards.first.class
-end
 
-  def test_can_read_lines_in_file
+  def test_card_generator_pulls_txt_into_card_objects
     cards = CardGenerator.new("card.txt").cards
     assert_instance_of Card, cards[0]
   end
+
+  def test_card_contains_question
+    cards = CardGenerator.new("card.txt").cards
+    assert_equal "What is 5 + 5?", cards[0].question
+  end
+
 end

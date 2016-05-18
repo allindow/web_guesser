@@ -3,7 +3,7 @@ attr_reader   :card,
               :response
 
   def initialize(response, card)
-    @response = response
+    @response = response.capitalize
     @card = card
   end
 
