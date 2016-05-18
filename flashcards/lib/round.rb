@@ -32,6 +32,11 @@ class Round
     ((@correct_count.to_f / @guesses.count.to_f) * 100).to_i
   end
 
+  def end_round
+    puts "****** Game over! ******"
+    puts "You had #{number_correct} correct guesses out of #{deck.count} for a score of #{percent_correct}%."
+  end
+
   def start
     card_number = 1
     puts "Welcome! You're playing with #{deck.count} cards."
@@ -45,13 +50,7 @@ class Round
       puts guess.feedback
       card_number += 1
     end
-
-    end_game
-  end
-
-  def end_game
-    puts "****** Game over! ******"
-    puts "You had #{number_correct} correct guesses out of #{deck.count} for a score of #{percent_correct}%."
+    end_round
   end
 
 end
