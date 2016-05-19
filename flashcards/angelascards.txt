@@ -1,6 +1,4 @@
 In roller derby what is the skater with the star on her helmet called?,Jammer
 What ocean is Guam in-Pacific or Indian?,Pacific
-Which method removes the last element in an array?,pop
-Which method adds an element to the beginning of an array?,unshift
-Which array method can be called to find the data at the position you specify?,[]
-What terminal command shows you your current working directory?,pwd
+What is the middle Hanson brother's name?,Taylor
+What instrument does Zac Hanson play?,drums

@@ -4,6 +4,8 @@ require './lib/deck'
 require './lib/round'
 require './lib/card_generator'
 
+
+
 if ARGV[0].nil?
   puts "What is your file name?"
   filename = gets.chomp
@@ -16,4 +18,3 @@ deck = Deck.new(cards)
 round = Round.new(deck)
 
 round.start
-round.end_it
