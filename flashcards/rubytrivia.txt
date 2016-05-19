@@ -1,0 +1,4 @@
+What does a method return if it does not contain an expression?,nil
+Can you run Enumerables on strings?,no
+What is the superclass of Fixnum?,integer
+What method removes the first element in an array?,shift

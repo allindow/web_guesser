@@ -3,7 +3,6 @@ require './lib/guess'
 require './lib/deck'
 require './lib/round'
 require './lib/card_generator'
-require './lib/userfile'
 
 if ARGV[0].nil?
   puts "What is your file name?"

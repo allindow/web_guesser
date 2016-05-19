@@ -56,7 +56,6 @@ class Round
       pause
       puts "\n\n"
     end
-    # end_round
   end
-
+  
 end
