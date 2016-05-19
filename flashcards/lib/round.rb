@@ -48,7 +48,7 @@ class Round
       puts "This is card number #{card_number} out of #{deck.count}"
       results.puts "This is card number #{card_number} out of #{deck.count}"
       puts "Question: #{current_card.question}\n\n"
-      results.puts "Question: #{current_card.question}\n\n"
+      results.puts "Question: #{current_card.question}"
       results.puts "Answer: #{current_card.answer}\n\n"
       response = STDIN.gets.chomp()
       results.puts "Response: #{response}"
@@ -58,6 +58,7 @@ class Round
       card_number += 1
       pause
       puts "\n\n"
+      results.puts "\n""\n"
     end
       puts "****** Game over! ******"
       puts "You had #{number_correct} correct guesses out of #{deck.count} for a score of #{percent_correct}%.\n\n"
