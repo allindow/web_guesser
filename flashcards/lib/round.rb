@@ -36,7 +36,7 @@ class Round
   end
 
   def start
-    time = Time.new
+    time = Time.new.strftime("%Y-%m-%e-%l:%m%p")
     results = File.open("results #{time}","w")
     puts "\n\n"
     results.puts "\n""\n"
