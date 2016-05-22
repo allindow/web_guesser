@@ -1,0 +1,28 @@
+#
+# class FileRunner
+#   def initialize(reader_file,new_file)
+#
+#   end
+#   new_file = ARGV[1]
+# reader_file = ARGV[0]
+# reader_file_string = File.read(reader_file)
+# writer_output = reader_file_string.chomp
+# translator = { "a" =>"0.\n..\n..\n" }
+#
+# File.write(new_file, translator[writer_output])
+# new_file_string = File.read(new_file)
+# reader_character_count = reader_file_string.chomp.length
+# new_file_character_count = new_file_string.chomp.length
+#
+# puts "Created '#{new_file}' containing #{new_file_character_count} characters."
+#
+# end
+
+Big picture: convert txt file from eng to braille and braille to eng
+
+small problems:
+read txt file from argv[0]   -done
+copy contents from argv[0] to argv[1] -done
+using hash, convert letters (and spaces) to an array of braille strings - done
+invert hash and convert array of braille to text string - done
+create parser to shovel in braille strings by line arrays
