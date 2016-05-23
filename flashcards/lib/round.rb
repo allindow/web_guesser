@@ -18,8 +18,8 @@ class Round
   end
 
   def record_guess(response)
-    @guesses << Guess.new(response, current_card)
-    guess = @guesses.last
+    guesses << Guess.new(response, current_card)
+    guess = guesses.last
     if guess.correct?
       @correct_count += 1
     end
@@ -32,7 +32,7 @@ class Round
   end
 
   def percent_correct
-    ((@correct_count.to_f / @guesses.count.to_f) * 100).to_i
+    ((@correct_count.to_f / guesses.count.to_f) * 100).to_i
   end
 
   def start
