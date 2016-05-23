@@ -25,4 +25,11 @@ read txt file from argv[0]   -done
 copy contents from argv[0] to argv[1] -done
 using hash, convert letters (and spaces) to an array of braille strings - done
 invert hash and convert array of braille to text string - done
-create parser to shovel in braille strings by line arrays
+create parser to shovel in braille strings by line arrays - kinda done..
+
+What does a new instance of each class create?
+FileReader.new = string of the reader file with newline chars
+FileWriter.new = initialized with parsed conversion, has write method to write to file
+BrailleConvert = initialized with the message that needs to be converted. - this will be FileReader.read(ARGV[0]).Uses method convert!
+Parser = initialized with converted message, has braille_array_parser to split braille into arrays with 2 chars each
+          also has line_parser method to parse those characters into each of the 3 lines of the txt file
