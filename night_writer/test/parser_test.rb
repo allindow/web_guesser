@@ -1,26 +1,34 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/filereader'
-require './lib/filewriter'
 require './lib/braille_converter'
 require './lib/parser'
 
 class ParserTest < Minitest::Test
 
-  def test_can_parse_one_braille_character_into_3_arrays
-    b_string = Parser.new("0.....")
-    assert_equal [["0."],[".."],[".."]], b_string.braille_array_parser
+  def test_can_split_each_braille_char_into_pair_strings_lowercase
+    message = BrailleConverter.new
+    braille_conversion = message.convert!("me")
+    parse = Parser.new
+    assert_equal [["00","..","0."],["0.",".0",".."]],parse.braille_split(braille_conversion)
   end
 
-  def test_can_parse_multiple_braille_characters_into_3_arrays_each
+  def test_can_split_each_braille_char_into_pair_strings_uppercase
     skip
+    message = BrailleConverter.new
+    braille_conversion = message.convert!("Me")
+    require "pry"; binding.pry
+    parse = Parser.new
+    assert_equal [[]]
   end
 
-  def test_can_parse_onto_separate_lines_of_txt_file
-    b_string = Parser.new("0.....")
-    # parsed_b = b_string.braille_array_parser
-    # require "pry"; binding.pry
-    assert_equal "0.\n..\n..\n", line_parser(parsed_b)
+  def test_line_pairs_can_be_combined_into_one_array
+    skip
+    parser = Parser.new
+    input = [["00","..","0."],["0.",".0",".."],["..","..",".."]]
+    require "pry"; binding.pry
+    assert_equal [["000..."],["...0.."],["0....."]], parser.line_sets(input)
   end
+
 
 end

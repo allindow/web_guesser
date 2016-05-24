@@ -2,20 +2,17 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/filereader.rb'
 require './lib/nightwriter.rb'
+require './lib/braille_converter'
+require './lib/parser'
 
 class NightWriterTest < Minitest::Test
 
   def test_encode_to_braille
-    skip
     nightwriter = NightWriter.new
-    assert_equal "dog", nightwriter.encode_to_braille
+    assert_equal [["00", "..", "0."], ["0.", ".0", ".."]], nightwriter.encode_to_braille("me")
   end
 
-  def test_write_contents_to_new_file
+  def test_encode_file_to_braille
     skip
-    original_file = NightWriter.new
-    reader = original_file.file_reader
-    assert_equal "hello world\n", reader.write
   end
-
 end
