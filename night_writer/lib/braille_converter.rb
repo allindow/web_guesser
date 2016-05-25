@@ -5,7 +5,6 @@ class BrailleConverter
                  :number_to_braille
 
   def initialize
-    bc = BrailleConverter.new
     @braille = []
     @text = []
     @letters_to_braille = {
@@ -20,12 +19,12 @@ class BrailleConverter
     "y" => "00.000", "z" => "0..000", " " => "......",
     "." => "..00.0", "?" => "..0.00", "!" => "..000.",
     "'" => "....0.", "," => "..0...", "-" => "....00",
-    :capital => ".....0", :number => ".0.0.."}
+    :capital => ".....0"}
     @number_to_braille = {
       "0" => ".000..", "1" => "0.....", "2" => "0.0...",
       "3" => "00....", "4" => "00.0..", "5" => "0..0..",
       "6" => "000...", "7" => "0000..", "8" => "0.00..",
-      "9" =>  ".00...", " " => "......", :number => ".0.0.."}
+      "9" =>  ".00...", :number => ".0.0.."}
   end
 
 
@@ -37,8 +36,8 @@ class BrailleConverter
       previous_character = message[message.index(char) - 1]
       if letters_to_braille.key?(char)
       braille << letters_to_braille[char]
-    elsif number_to_braille.key?(char)
-        if previous_character == " " || message.index(char) == 0
+      elsif number_to_braille.key?(char)
+        if braille.last == "......"
           braille << number_to_braille[:number] << number_to_braille[char]
         else
           braille << number_to_braille[char]
@@ -51,27 +50,26 @@ class BrailleConverter
   end
 
   def braille_to_text(message)
-    message.map do |char|
+      message.each do |char|
       next_character_index = message.index(char) + 1
       next_character = message[message.index(char)+ 1]
       previous_character_index = message.index(char) - 1
       previous_character = message[message.index(char) - 1]
-      if char == ".....0"
+      if char == "......"
+        text << letters_to_braille.invert[char]
+      elsif char == ".0.0.."
+            text << number_to_braille.invert[next_character]
+            message.delete_at(next_character_index)
+      elsif number_to_braille.key?(text.last)
+            text << number_to_braille.invert[char]
+      elsif char == ".....0"
+        message.delete_at message.index(char)
         text << letters_to_braille.invert[next_character].upcase
-        message.delete_at(next_character_index)
-        require "pry"; binding.pry
-      elsif char == ".0.0.." || number_to_braille.key?(bc.convert!(previous_character))
-        if char == ".0.0.."
-          text << number_to_braille.invert[next_character]
-          message.delete_at(next_character_index)
-        else
-          text << number_to_braille.invert[char]
-        end
       else
         text << letters_to_braille.invert[char]
-      end
     end
-    text.flatten.join
+  end
+  text.join
   end
 
   def convert!(message)

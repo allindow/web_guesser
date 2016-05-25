@@ -10,7 +10,18 @@ class Parser
 
   def braille_characters(braille_lines)
     lines = braille_lines.split("\n")
-  
-  end
+    single_braille_character = ""
+    all_braille_characters = []
+    until lines[0] == ""
+      lines.each do |line|
+        single_braille_character << line.slice!(0..1)
+          if single_braille_character.length == 6
+            all_braille_characters << single_braille_character
+            single_braille_character = ""
+          end
+        end
+      end
+      all_braille_characters
+   end
 
 end

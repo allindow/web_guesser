@@ -1,4 +1,4 @@
-class FileReader
+class FileIO
 
   def read(filename = ARGV[0])
     File.read(filename)

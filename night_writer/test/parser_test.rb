@@ -1,7 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'rake/testtask'
-require './lib/file_reader'
 require './lib/braille_converter'
 require './lib/parser'
 
