@@ -2,10 +2,16 @@ class Parser
 
 
   def braille_lines(conversion)
+    split_line_limit = []
     conversion = conversion.map {|char| char.scan(/.{1,2}/)}
-    split_line = conversion.transpose
-    split_line.map {|line| line.join}
-  end
+    split_line = conversion.transpose.map {|line| line.join}
+    until split_line[0] == ""
+         split_line.each do |line|
+            split_line_limit << line.slice!(0..79)+"\n"
+          end
+      end
+    split_line_limit.join("")
+    end
 
 
   def braille_characters(braille_lines)

@@ -1,3 +1,10 @@
+
+  def initialize
+    @file_reader = FileReader.new
+    @converter = BrailleConverter.new
+    @parser = Parser.new
+  end
+
 Converter will take english characters and spit out an array with strings for each character
           will take array of character strings and spit out text
 
