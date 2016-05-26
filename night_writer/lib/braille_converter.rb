@@ -80,4 +80,17 @@ class BrailleConverter
     end
   end
 
+  def wrap_text(converted_text)
+    split_line_limit = []
+    converted_text = converted_text.chars
+    converted_text = converted_text.map {|char| char.scan(/.{1,2}/)}
+    split_line = converted_text.transpose.map {|line| line.join}
+  until split_line[0] == ""
+       split_line.each do |line|
+          split_line_limit << line.slice!(0..79)+"\n"
+        end
+    end
+  split_line_limit.join("")
+  end
+
 end
