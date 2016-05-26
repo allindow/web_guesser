@@ -28,46 +28,57 @@ class BrailleConverter
   end
 
 
+  def convert_numbers_to_braille(char)
+    if braille.last == "......"
+      braille << number_to_braille[:number] << number_to_braille[char]
+    else
+      braille << number_to_braille[char]
+    end
+  end
+
   def text_to_braille(message)
     message.each_char do |char|
-      next_character_index = message.index(char) + 1
-      next_character = message[message.index(char)+ 1]
-      previous_character_index = message.index(char) - 1
-      previous_character = message[message.index(char) - 1]
-      if letters_to_braille.key?(char)
+      case
+      when letters_to_braille.key?(char)
       braille << letters_to_braille[char]
-      elsif number_to_braille.key?(char)
-        if braille.last == "......"
-          braille << number_to_braille[:number] << number_to_braille[char]
-        else
-          braille << number_to_braille[char]
-        end
-      elsif letters_to_braille.key?(char.downcase)
+      when number_to_braille.key?(char)
+        convert_numbers_to_braille(char)
+      when letters_to_braille.key?(char.downcase)
         braille << letters_to_braille[:capital] << letters_to_braille[char.downcase]
       end
     end
     braille.flatten
   end
 
+  def braille_numbers_to_text(message, char)
+    next_character_index = message.index(char) + 1
+    next_character = message[message.index(char)+ 1]
+    text << number_to_braille.invert[next_character]
+    message.delete_at(next_character_index)
+  end
+
+  def braille_capital_to_text(message,char)
+    next_character = message[message.index(char)+ 1]
+    message.delete_at message.index(char)
+    text << letters_to_braille.invert[next_character].upcase
+  end
+
   def braille_to_text(message)
       message.each do |char|
       next_character_index = message.index(char) + 1
       next_character = message[message.index(char)+ 1]
-      previous_character_index = message.index(char) - 1
-      previous_character = message[message.index(char) - 1]
-      if char == "......"
-        text << letters_to_braille.invert[char]
-      elsif char == ".0.0.."
-            text << number_to_braille.invert[next_character]
-            message.delete_at(next_character_index)
-      elsif number_to_braille.key?(text.last)
+        case
+        when char == "......"
+          text << letters_to_braille.invert[char]
+        when char == ".0.0.."
+          braille_numbers_to_text(message,char)
+        when number_to_braille.key?(text.last)
             text << number_to_braille.invert[char]
-      elsif char == ".....0"
-        message.delete_at message.index(char)
-        text << letters_to_braille.invert[next_character].upcase
-      else
-        text << letters_to_braille.invert[char]
-    end
+        when char == ".....0"
+          braille_capital_to_text(message,char)
+        else
+          text << letters_to_braille.invert[char]
+      end
   end
   text.join
   end
@@ -81,16 +92,16 @@ class BrailleConverter
   end
 
   def wrap_text(converted_text)
-    split_line_limit = []
-    converted_text = converted_text.chars
-    converted_text = converted_text.map {|char| char.scan(/.{1,2}/)}
-    split_line = converted_text.transpose.map {|line| line.join}
-  until split_line[0] == ""
-       split_line.each do |line|
-          split_line_limit << line.slice!(0..79)+"\n"
+    line_limit      = []
+    converted_text  = converted_text.chars
+    character_split = converted_text.map {|char| char.scan(/.{1,2}/)}
+    split_line      = character_split.transpose.map {|line| line.join}
+    until split_line[0].empty?
+      split_line.each do |line|
+          line_limit << line.slice!(0..79)+"\n"
         end
     end
-  split_line_limit.join("")
+  line_limit.join("")
   end
 
 end
