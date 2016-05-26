@@ -1,6 +1,21 @@
 class Parser
 
 
+  def join_lines(one_braille_string)
+    braille_split = one_braille_string.split("\n")
+    current_index = 0
+    until braille_split.count == 3
+      braille_split[current_index]+= braille_split[3]
+      braille_split.delete_at(3)
+      if current_index == 2
+        current_index = 0
+      else
+        current_index += 1
+      end
+    end
+    braille_split
+  end
+
   def braille_lines(conversion)
     split_line_limit = []
     conversion = conversion.map {|char| char.scan(/.{1,2}/)}
@@ -14,8 +29,9 @@ class Parser
     end
 
 
+
   def braille_characters(braille_lines)
-    lines = braille_lines.split("\n")
+    lines = braille_lines
     single_braille_character = ""
     all_braille_characters = []
     until lines[0] == ""
