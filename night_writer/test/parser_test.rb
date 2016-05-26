@@ -29,7 +29,7 @@ class ParserTest < Minitest::Test
 
   def test_can_take_file_lines_and_parse_to_braille_character_strings
     parse = Parser.new
-    assert_equal [".....0", "00..0.", "0..0..", "......", ".0.0..", "0.0...", "..000."], parse.braille_characters("..000....00...\n.....0...00.00\n.00.........0.")
+    assert_equal [".....0", "00..0.", "0..0..", "......", ".0.0..", "0.0...", "..000."], parse.braille_characters(["..000....00...",".....0...00.00",".00.........0."])
   end
 
   def test_split_braille_at_80_characters

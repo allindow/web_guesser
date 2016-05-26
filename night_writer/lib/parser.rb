@@ -1,6 +1,5 @@
 class Parser
 
-
   def join_lines(one_braille_string)
     braille_split = one_braille_string.split("\n")
     current_index = 0
@@ -27,7 +26,6 @@ class Parser
       end
     split_line_limit.join("")
     end
-
 
 
   def braille_characters(braille_lines)
