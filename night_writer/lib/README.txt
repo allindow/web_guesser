@@ -1,27 +1,30 @@
+The idea of Night Writing was first developed for Napoleon's army so soldiers could communicate silently at night without light.
+The concept of night writing led to Louis Braille's development of his Braille tactile writing system.
 
-The idea of Night Writing was first developed for Napoleon's army so soldiers could communicate silently at night without light. The concept of night writing led to Louis Braille's development of his Braille tactile writing system.
+This program converts latin character messages into Braille-like characters represented by blocks of 2 by 3 where a . represents an unraised space and
+0 represents a raised space.
 
-In this project we'll implement systems for generating Braille-like text from normal characters and the reverse.
+Examples:
 
-Simulating Braille
-
-Braille uses a two-by-three grid of dots to represent characters. We'll simulate that concept by using three lines of symbols:
+0.
+00   => h
+..
 
 0.0.0.0.0....00.0.0.00
-00.00.0..0..00.0000..0
+00.00.0..0..00.0000..0    => hello world
 ....0.0.0....00.0.0...
-The 0 represents a raised dot. The period is an unraised space. The above code reads "hello world" in normal text.
 
+It also converts braille to latin characters!
 
-An Interaction Model
+A full alphabet of Braille can be found at http://braillebug.afb.org/braille_print.asp
 
-        The tool is used from the command line like so:
-
+To convert from latin characters to Braille, provide a message in the project root folder in message.txt
+Then run
         $ ruby ./lib/night_write.rb message.txt braille.txt
-        Created 'braille.txt' containing 256 characters
-        That will use the plaintext file message.txt to create a Braille simulation file braille.txt.
+This will return a message stating how many characters of braille were produced. Resulting conversion will be saved in
+braille.txt in the project root folder.
 
-        Then we can convert that Braille simulation back to normal text:
-
-        $ ruby ./lib/night_read.rb braille.txt original_message.txt
-        Created 'original_message.txt' containing 256 characters.
+To convert from Braille to latin characters, provide braille in braille.txt and run
+      $ ruby ./lib/night_write.rb message.txt braille.txt
+This will return a message stating how many latin characters were created, and the translated
+message will be saved to message.txt
