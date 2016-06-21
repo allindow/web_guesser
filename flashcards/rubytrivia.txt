@@ -1,0 +1,8 @@
+What does a method return if it does not contain an expression?,nil
+Can you run Enumerables on strings?,no
+What is the superclass of Fixnum?,integer
+What method removes the first element in an array?,shift
+Which method removes the last element in an array?,pop
+Which method adds an element to the beginning of an array?,unshift
+Which array method can be called to find the data at the position you specify?,[]
+What terminal command shows you your current working directory?,pwd
